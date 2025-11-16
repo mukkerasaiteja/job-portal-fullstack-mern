@@ -6,7 +6,7 @@ export default function generateToken(id) {
       id: id,
     },
     process.env.JWT_Secret,
-    { expiresIn: "2d" }
+    { expiresIn: "7d" }
   );
 
   return token;

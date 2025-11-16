@@ -2,9 +2,12 @@ import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
+dotenv.config({ path: "../.env" });
 import { connectDB } from "./config/db.js";
 
-dotenv.config({ path: "../.env" });
+//Importing Routes
+import userRoutes from "./routes/user.route.js";
+import morgan from "morgan";
 
 const app = express();
 
@@ -18,6 +21,10 @@ const corsOptions = {
   credentials: true,
 };
 app.use(cors(corsOptions));
+app.use(morgan("dev"));
+
+//Using Routes
+app.use("/api/v1/users", userRoutes);
 
 app.listen(PORT, async () => {
   await connectDB();
