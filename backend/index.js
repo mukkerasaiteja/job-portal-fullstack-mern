@@ -1,4 +1,5 @@
 import express from "express";
+import morgan from "morgan";
 import cors from "cors";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
@@ -9,7 +10,7 @@ import { connectDB } from "./config/db.js";
 import userRoutes from "./routes/user.route.js";
 import companyRoutes from "./routes/company.route.js";
 import jobRoutes from "./routes/job.route.js";
-import morgan from "morgan";
+import applicationRoutes from "./routes/application.route.js";
 
 const app = express();
 
@@ -30,6 +31,7 @@ const PORT = process.env.PORT || 8080;
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/company", companyRoutes);
 app.use("/api/v1/jobs", jobRoutes);
+app.use("/api/v1/applications", applicationRoutes);
 
 app.listen(PORT, async () => {
   await connectDB();
