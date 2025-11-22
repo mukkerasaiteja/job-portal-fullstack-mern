@@ -19,15 +19,24 @@ function NavBar() {
 
         <div className="flex items-center font-medium gap-7">
           <ul className="flex items-center gap-5">
-            <li className="cursor-pointer text-gray-800 dark:text-gray-200 transition-colors hover:text-[#F83002] dark:hover:text-[#F83002]">
+            <Link
+              to="/"
+              className="cursor-pointer text-gray-800 dark:text-gray-200 transition-colors hover:text-[#F83002] dark:hover:text-[#F83002]"
+            >
               Home
-            </li>
-            <li className="cursor-pointer text-gray-800 dark:text-gray-200 transition-colors hover:text-[#F83002] dark:hover:text-[#F83002]">
+            </Link>
+            <Link
+              to="/browse"
+              className="cursor-pointer text-gray-800 dark:text-gray-200 transition-colors hover:text-[#F83002] dark:hover:text-[#F83002]"
+            >
               Browse
-            </li>
-            <li className="cursor-pointer text-gray-800 dark:text-gray-200 transition-colors hover:text-[#F83002] dark:hover:text-[#F83002]">
+            </Link>
+            <Link
+              to="/jobs"
+              className="cursor-pointer text-gray-800 dark:text-gray-200 transition-colors hover:text-[#F83002] dark:hover:text-[#F83002]"
+            >
               Jobs
-            </li>
+            </Link>
           </ul>
           {!user ? (
             <div className="flex gap-5 ">

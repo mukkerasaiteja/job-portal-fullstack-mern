@@ -3,6 +3,14 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@layer base {
+  @theme {
+    --font-jakarta: "Plus Jakarta Sans", sans-serif;
+  }
+}
+body {
+  font-family: var(--font-jakarta);
+}
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);

@@ -1,17 +1,15 @@
 {
   "files": [],
   "references": [
-    {
-      "path": "./jsconfig.app.json"
-    },
-    {
-      "path": "./jsconfig.node.json"
-    }
+    { "path": "./jsconfig.app.json" },
+    { "path": "./jsconfig.node.json" }
   ],
   "compilerOptions": {
     "baseUrl": ".",
+    "jsx": "react-jsx",
     "paths": {
       "@/*": ["./src/*"]
     }
-  }
+  },
+  "include": ["src"]
 }
