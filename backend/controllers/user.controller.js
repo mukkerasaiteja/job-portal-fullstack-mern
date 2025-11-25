@@ -120,7 +120,9 @@ async function updateUserProfile(req, res) {
 
     if (skills !== undefined) {
       user.profile.skills =
-        typeof skills === "string" ? skills.split(",") : skills;
+        typeof skills === "string"
+          ? skills.split(",").map((skill) => skill.trim())
+          : skills;
     }
 
     await user.save();
@@ -131,7 +133,7 @@ async function updateUserProfile(req, res) {
     });
   } catch (error) {
     console.error("Update profile error:", error);
-    return res.status(500).json({ message: "Server error" });
+    return res.status(500).json({ message: "Update profile error" });
   }
 }
 

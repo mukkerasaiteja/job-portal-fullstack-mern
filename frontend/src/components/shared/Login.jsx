@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Input } from "@/components/ui/Input";
-import { Label } from "@/components/ui/Label";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Spinner } from "@/components/ui/spinner";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Link, useNavigate } from "react-router-dom";
@@ -9,7 +9,7 @@ import { toast } from "sonner";
 import axios from "axios";
 import { USER_API_END_POINT } from "../../utilis/User_Endpoints";
 import { useDispatch, useSelector } from "react-redux";
-import { setLoading } from "../../redux/authSlice";
+import { setLoading, setUser } from "../../redux/authSlice";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -40,6 +40,8 @@ function Login() {
         // Save token + user
         localStorage.setItem("token", `Bearer ${resp.data.token}`);
         localStorage.setItem("user", JSON.stringify(resp.data.user));
+
+        dispatch(setUser(resp.data.user)); // set user in redux
 
         toast.success(`Welcome back ${resp.data.user.fullName}.`);
         navigate("/");

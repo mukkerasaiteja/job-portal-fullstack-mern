@@ -5,12 +5,11 @@ async function auth(req, res, next) {
   try {
     let token;
 
-    // Expecting: Authorization: Bearer <token>
-    if (
-      req.headers.authorization &&
-      req.headers.authorization.startsWith("Bearer ")
-    ) {
-      token = req.headers.authorization.split(" ")[1];
+    // Expect: Authorization: Bearer <token>
+    const authHeader = req.headers.authorization;
+
+    if (authHeader && authHeader.startsWith("Bearer ")) {
+      token = authHeader.split(" ")[1];
     }
 
     if (!token) {
@@ -19,29 +18,29 @@ async function auth(req, res, next) {
       });
     }
 
-    // Verify token
+    // Verify JWT
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    // Attach user id for controllers that rely on req.id
-    req.id = decoded.id;
+    req.id = decoded.id; // attach id
 
-    // Fetch user (without password)
     const user = await userModel.findById(decoded.id).select("-password");
     if (!user) {
-      return res.status(401).json({
-        message: "User no longer exists.",
-      });
+      return res.status(401).json({ message: "User no longer exists." });
     }
 
-    req.user = user; // attach full user object
+    req.user = user; // attach full user
 
     next();
   } catch (err) {
     console.error("Auth Error:", err);
 
-    return res.status(401).json({
-      message: "Invalid or expired token.",
-    });
+    if (err.name === "TokenExpiredError") {
+      return res
+        .status(401)
+        .json({ message: "Token expired. Please login again." });
+    }
+
+    return res.status(401).json({ message: "Invalid token." });
   }
 }
 

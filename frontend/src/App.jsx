@@ -4,6 +4,10 @@ import { Routes, Navigate, Route } from "react-router-dom";
 import Login from "./components/shared/Login";
 import Signup from "./components/shared/Signup";
 import Home from "./components/shared/Home";
+import Jobs from "./components/shared/jobs";
+import Browse from "./components/shared/Browse";
+import ViewProfile from "./components/shared/ViewProfile";
+import JobDescription from "./components/shared/JobDescription";
 
 function App() {
   return (
@@ -13,6 +17,11 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/jobs" element={<Jobs />} />
+        <Route path="/browse" element={<Browse />} />
+        <Route path="/view-profile" element={<ViewProfile />} />
+        <Route path="/description/:id" element={<JobDescription />} />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </ThemeProvider>
   );

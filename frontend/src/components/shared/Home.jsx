@@ -11,7 +11,7 @@ function Home() {
       <Hero />
       <CategoryCarousel />
       <LatestJobs />
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }

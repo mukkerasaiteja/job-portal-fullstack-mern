@@ -5,16 +5,26 @@ import { LuLogOut } from "react-icons/lu";
 import { FaRegUser } from "react-icons/fa";
 import { ModeToggle } from "../ui/mode-toggle";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+
+function handleLogout() {
+  // Clear local storage
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+}
 
 function NavBar() {
-  const user = false;
+  const { user } = useSelector((store) => store.auth);
+  //console.log(user);
   return (
     <div className="bg-white dark:bg-gray-950 shadow-sm dark:shadow-lg transition-colors">
       <div className="flex justify-between items-center mx-auto max-w-7xl h-16 px-4">
         <div className="cursor-pointer">
-          <h1 className="text-2xl font-semibold text-gray-900 dark:text-white transition-colors">
-            Job<span className="text-[#F83002]">Portal</span>
-          </h1>
+          <Link to="/">
+            <h1 className="text-2xl font-semibold text-gray-900 dark:text-white transition-colors">
+              Job<span className="text-[#F83002]">Portal</span>
+            </h1>
+          </Link>
         </div>
 
         <div className="flex items-center font-medium gap-7">
@@ -88,19 +98,23 @@ function NavBar() {
 
                 {/* Menu Items */}
                 <div className="flex flex-col gap-1 ">
-                  <Button
-                    variant="ghost"
-                    className="w-full flex justify-start gap-3 px-3 py-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-                  >
-                    <FaRegUser className="size-5 text-gray-600 dark:text-gray-300 transition-colors" />
-                    <span className="text-sm font-medium text-gray-700 dark:text-gray-200 transition-colors">
-                      View Profile
-                    </span>
-                  </Button>
+                  <Link to="/view-profile">
+                    <Button
+                      variant="ghost"
+                      className="w-full flex justify-start gap-3 px-3 py-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                    >
+                      <FaRegUser className="size-5 text-gray-600 dark:text-gray-300 transition-colors" />
+
+                      <span className="text-sm font-medium text-gray-700 dark:text-gray-200 transition-colors">
+                        View Profile
+                      </span>
+                    </Button>
+                  </Link>
 
                   <Button
                     variant="ghost"
                     className="w-full flex justify-start gap-3 px-3 py-2 cursor-pointer hover:bg-red-50 dark:hover:bg-red-800 transition-colors"
+                    onClick={handleLogout}
                   >
                     <LuLogOut className="size-5 text-red-500 dark:text-red-400 transition-colors" />
                     <span className="text-sm font-medium text-red-600 dark:text-red-300 transition-colors">
