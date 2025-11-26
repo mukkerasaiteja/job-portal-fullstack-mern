@@ -27,9 +27,7 @@ function uploadToCloudinary(buffer, originalName, folder) {
   });
 }
 
-// ---------------------------------------------------------------------------
 // REGISTER
-// ---------------------------------------------------------------------------
 export async function register(req, res) {
   try {
     const { fullName, email, password, phoneNumber, role } = req.body;
@@ -99,9 +97,8 @@ export async function register(req, res) {
   }
 }
 
-// ---------------------------------------------------------------------------
 // LOGIN
-// ---------------------------------------------------------------------------
+
 export async function login(req, res) {
   try {
     const { email, password, role } = req.body;
@@ -133,9 +130,8 @@ export async function login(req, res) {
   }
 }
 
-// ---------------------------------------------------------------------------
 // UPDATE PROFILE
-// ---------------------------------------------------------------------------
+
 export async function updateUserProfile(req, res) {
   try {
     const userId = req.user._id;
