@@ -56,7 +56,7 @@ function Login() {
   }
 
   return (
-    <div className="flex items-center justify-center w-full min-h-screen px-4">
+    <div className="flex items-center justify-center w-full  px-4">
       <form
         className="
           w-full max-w-sm 

@@ -4,7 +4,7 @@ import { Routes, Navigate, Route } from "react-router-dom";
 import Login from "./components/shared/Login";
 import Signup from "./components/shared/Signup";
 import Home from "./components/shared/Home";
-import Jobs from "./components/shared/jobs";
+import Jobs from "./components/shared/Jobs";
 import Browse from "./components/shared/Browse";
 import ViewProfile from "./components/shared/ViewProfile";
 import JobDescription from "./components/shared/JobDescription";

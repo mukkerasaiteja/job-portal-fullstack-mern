@@ -79,7 +79,7 @@ function UpdateProfileModal({ isModalOpen, setIsModalOpen }) {
         toast.success(resp.data.message);
         //Update Redux user so UI refreshes instantly
         dispatch(setUser(resp.data.user));
-
+        console.log(resp.data.user);
         setIsModalOpen(false);
       }
     } catch (error) {

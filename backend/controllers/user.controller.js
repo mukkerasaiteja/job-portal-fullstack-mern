@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import userModel from "../models/user.model.js";
 import generateToken from "../utils/generateToken.js";
+import cloudinary from "../utils/cloudinary.js";
 
 // REGISTER
 async function register(req, res) {
@@ -106,29 +107,57 @@ async function login(req, res) {
 async function updateUserProfile(req, res) {
   try {
     const userId = req.user._id;
-    const { fullName, phoneNumber, email, bio, skills } = req.body;
+
+    const { fullName, email, phoneNumber, bio, skills } = req.body;
 
     const user = await userModel.findById(userId);
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
+    if (!user) return res.status(404).json({ message: "User not found" });
 
+    //Update basic fields
     if (fullName !== undefined) user.fullName = fullName;
-    if (phoneNumber !== undefined) user.phoneNumber = phoneNumber;
     if (email !== undefined) user.email = email;
+    if (phoneNumber !== undefined) user.phoneNumber = phoneNumber;
     if (bio !== undefined) user.profile.bio = bio;
 
     if (skills !== undefined) {
-      user.profile.skills =
-        typeof skills === "string"
-          ? skills.split(",").map((skill) => skill.trim())
-          : skills;
+      user.profile.skills = skills
+        .split(",")
+        .map((s) => s.trim())
+        .filter(Boolean);
     }
 
+    // Handle resume upload
+    if (req.file) {
+      const originalName = req.file.originalname.replace(/\s+/g, "_");
+
+      const cloudResult = await new Promise((resolve, reject) => {
+        cloudinary.uploader
+          .upload_stream(
+            {
+              folder: "jobportal_resumes",
+              public_id: originalName,
+              use_filename: true,
+              unique_filename: false,
+              overwrite: true,
+              resource_type: "raw",
+            },
+            (error, result) => {
+              if (error) reject(error);
+              else resolve(result);
+            }
+          )
+          .end(req.file.buffer);
+      });
+
+      user.profile.resumeURL = cloudResult.secure_url;
+      user.profile.resumeOriginalName = req.file.originalname;
+    }
+
+    //Save the user
     await user.save();
 
     return res.status(200).json({
-      message: "User profile updated successfully",
+      message: "Profile updated successfully",
       user,
     });
   } catch (error) {

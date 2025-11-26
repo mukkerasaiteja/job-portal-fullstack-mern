@@ -78,17 +78,20 @@ function NavBar() {
                 <div className="flex items-center gap-4">
                   <Avatar className="size-14 shadow-sm">
                     <AvatarImage
-                      src="https://github.com/shadcn.png"
+                      src={`${
+                        user?.profile?.profilePicture ||
+                        "https://github.com/shadcn.png"
+                      }`}
                       alt="User avatar"
                     />
                   </Avatar>
 
-                  <div className="flex flex-col">
+                  <div className="flex flex-col gap-1">
                     <h4 className="font-semibold text-base text-gray-900 dark:text-gray-100 transition-colors">
-                      Sai Teja
+                      {user?.fullName}
                     </h4>
                     <p className="text-sm text-gray-500 dark:text-gray-400 leading-tight transition-colors">
-                      Lorem ipsum dolor sit amet consectetur.
+                      {user?.profile?.bio}
                     </p>
                   </div>
                 </div>

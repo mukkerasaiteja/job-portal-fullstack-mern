@@ -13,7 +13,7 @@ function ViewProfile() {
   //const skills = ["JavaScript", "React", "Node.js", "CSS", "HTML"];
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { user } = useSelector((store) => store.auth);
-  const isResumeUploaded = Boolean(user?.profile?.resumeUrl);
+  const isResumeUploaded = Boolean(user?.profile?.resumeURL);
 
   return (
     <div className="px-4">
@@ -86,12 +86,12 @@ function ViewProfile() {
 
           {isResumeUploaded ? (
             <Link
-              to="https://www.google.com"
+              to={user?.profile?.resumeURL}
               target="_blank"
               rel="noopener noreferrer"
               className="underline text-blue-600 dark:text-blue-400 hover:opacity-80"
             >
-              Download Resume
+              {user?.profile?.resumeOriginalName || "View Resume"}
             </Link>
           ) : (
             <span className="text-muted-foreground">NA</span>
@@ -100,7 +100,7 @@ function ViewProfile() {
       </div>
 
       {/* Applied Jobs Section */}
-      {user.profile.companyApplied.length > 0 ? (
+      {user?.profile?.companyApplied.length > 0 ? (
         <div className="mt-6 max-w-4xl mx-auto px-1">
           <h1 className="font-semibold text-md mb-3">Applied Jobs</h1>
           <AppliedJobs />

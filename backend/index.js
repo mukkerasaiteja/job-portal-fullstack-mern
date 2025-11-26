@@ -1,9 +1,8 @@
+import { PORT_SERVER } from "./config.js";
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
 import bodyParser from "body-parser";
-import dotenv from "dotenv";
-dotenv.config({ path: "../.env" });
 import { connectDB } from "./config/db.js";
 
 //Importing Routes
@@ -25,7 +24,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(morgan("dev"));
 
-const PORT = process.env.PORT || 8080;
+const PORT = PORT_SERVER || 8080;
 
 //Using Routes
 app.use("/api/v1/users", userRoutes);

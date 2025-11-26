@@ -18,21 +18,20 @@ function Signup() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [role, setRole] = useState("applicant");
   const [error, setError] = useState("");
-  const [profilePic, setProfilePic] = useState(null);
-  //const [loading, setLoading] = useState(false);
+  const [file, setFile] = useState(null);
 
-  const dispatch = useDispatch(); // redux dispatch
-  const { loading } = useSelector((store) => store.auth); // get loading from redux
+  const dispatch = useDispatch();
+  const { loading } = useSelector((store) => store.auth);
 
   const navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
-    //setLoading(true);
     setError("");
 
     try {
       dispatch(setLoading(true));
+
       const formData = new FormData();
       formData.append("fullName", fullName);
       formData.append("email", email);
@@ -40,8 +39,8 @@ function Signup() {
       formData.append("phoneNumber", phoneNumber);
       formData.append("role", role);
 
-      if (profilePic) {
-        formData.append("profilePic", profilePic);
+      if (file) {
+        formData.append("file", file);
       }
 
       const resp = await axios.post(
@@ -60,7 +59,7 @@ function Signup() {
       setError(err.response?.data?.message || "Server error");
       console.log("error while registering:", err);
     } finally {
-      dispatch(setLoading(false)); // set loading false in redux
+      dispatch(setLoading(false));
     }
   }
 
@@ -132,6 +131,7 @@ function Signup() {
             />
           </div>
 
+          {/* Role + Profile Picture */}
           <div className="flex flex-col md:flex-row gap-6">
             <div className="flex flex-col gap-2">
               <Label>Role</Label>
@@ -158,7 +158,8 @@ function Signup() {
                 id="picture"
                 type="file"
                 className="cursor-pointer mt-3"
-                onChange={(e) => setProfilePic(e.target.files[0])}
+                accept="image/*"
+                onChange={(e) => setFile(e.target.files[0])}
               />
             </div>
           </div>
@@ -170,7 +171,7 @@ function Signup() {
           {loading ? (
             <Button disabled className="w-full cursor-not-allowed">
               <Spinner />
-              Signing up.....
+              Signing up...
             </Button>
           ) : (
             <Button type="submit" className="w-full cursor-pointer">
