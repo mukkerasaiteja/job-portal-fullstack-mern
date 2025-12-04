@@ -166,8 +166,8 @@ function CompaniesTable() {
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Delete Company</DialogTitle>
-            <DialogDescription className="mt-2 ">
-              Are you sure you want to delete{" "}
+            <DialogDescription className="mt-2 leading-7">
+              Are you sure you want to delete?
               <span className="font-semibold">
                 {companyToDelete?.companyName}
               </span>

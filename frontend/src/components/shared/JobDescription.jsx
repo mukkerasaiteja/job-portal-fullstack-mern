@@ -114,6 +114,19 @@ function JobDescription() {
         </p>
 
         <p>
+          <span className="font-semibold">Required Skills:</span>{" "}
+          {job?.requirements?.length > 0 ? (
+            <ul className="list-disc ml-5 mt-1">
+              {job?.requirements?.map((req, index) => (
+                <li key={index}>{req}</li>
+              ))}
+            </ul>
+          ) : (
+            "NA"
+          )}
+        </p>
+
+        <p>
           <span className="font-semibold">Location:</span>{" "}
           {capitalizeEachWordPreservingDelimiters(job?.location)}
         </p>

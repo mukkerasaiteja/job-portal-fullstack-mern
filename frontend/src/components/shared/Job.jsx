@@ -33,7 +33,7 @@ function Job({ job }) {
       <div className="flex items-center gap-3 my-3">
         <Avatar className="shadow-sm rounded-md size-10">
           <AvatarImage
-            src="https://via.placeholder.com/40"
+            src={job?.company?.logoURL || "https://via.placeholder.com/40"}
             alt="Company Logo"
           />
         </Avatar>
@@ -59,21 +59,24 @@ function Job({ job }) {
       </div>
 
       {/* Badges */}
-      <div className="flex items-center gap-2 mt-3 flex-no-wrap">
+      <div className="flex items-center gap-1.5 mt-3">
         <Badge
           variant="secondary"
-          className="text-blue-700 dark:text-blue-300 font-medium"
+          className="text-blue-700 dark:text-blue-300 font-medium text-xs px-2 py-0.5"
         >
           {capitalizeEachWord(job?.jobType)}
         </Badge>
-        <Badge variant="secondary" className="text-[#F83002] font-medium">
-          {job?.vacancies} Vacancies
+        <Badge
+          variant="secondary"
+          className="text-[#F83002] font-medium text-xs px-2 py-0.5"
+        >
+          {job?.vacancies} Openings
         </Badge>
         <Badge
           variant="secondary"
-          className="text-[#7209b7] dark:text-purple-300 font-medium"
+          className="text-[#7209b7] dark:text-purple-300 font-medium text-xs px-2 py-0.5"
         >
-          ${job?.salary} / Year
+          ${job?.salary}/yr
         </Badge>
       </div>
 

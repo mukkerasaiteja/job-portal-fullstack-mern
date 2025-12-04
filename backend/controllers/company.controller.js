@@ -162,6 +162,10 @@ async function updateCompany(req, res) {
   }
 }
 
+// =======================================================
+// DELETE COMPANY
+// =======================================================
+
 async function deleteCompanyById(req, res) {
   try {
     const companyId = req.params.companyId;

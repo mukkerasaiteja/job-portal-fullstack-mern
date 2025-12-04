@@ -11,6 +11,9 @@ import JobDescription from "./components/shared/JobDescription";
 import Companies from "./components/shared/Admin/Companies";
 import CreateCompany from "./components/shared/Admin/CreateCompany";
 import SetupCompany from "./components/shared/Admin/SetupCompany";
+import AdminJobs from "./components/shared/Admin/AdminJobs";
+import CreateJob from "./components/shared/Admin/CreateJob";
+import SetupJob from "./components/shared/Admin/SetupJob";
 
 function App() {
   return (
@@ -31,6 +34,9 @@ function App() {
         <Route path="/admin/companies" element={<Companies />} />
         <Route path="/admin/companies/create" element={<CreateCompany />} />
         <Route path="/admin/companies/:id" element={<SetupCompany />} />
+        <Route path="/admin/jobs" element={<AdminJobs />} />
+        <Route path="/admin/jobs/create" element={<CreateJob />} />
+        <Route path="/admin/jobs/:id" element={<SetupJob />} />
       </Routes>
     </ThemeProvider>
   );

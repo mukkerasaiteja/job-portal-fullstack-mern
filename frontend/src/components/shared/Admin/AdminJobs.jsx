@@ -1,30 +1,30 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import CompaniesTable from "./CompaniesTable";
 import { useNavigate } from "react-router-dom";
-import useGetAllCompanies from "@/customHooks/useGetAllCompanies";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { setSearchCompanyByText } from "@/redux/companySlice";
+import { setSearchAdminJobByText } from "@/redux/jobSlice";
+import AdminJobsTable from "./AdminJobsTable";
+import useGetAdminJobs from "@/customHooks/useGetAdminJobs";
 import getCurrentTime from "@/utilis/currentTime";
 
-function Companies() {
-  useGetAllCompanies();
+function AdminJobs() {
+  useGetAdminJobs();
   const [input, setInput] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  4;
+
+  useEffect(() => {
+    dispatch(setSearchAdminJobByText(input));
+  }, [input, dispatch]);
 
   const { user } = useSelector((store) => store.auth);
 
-  useEffect(() => {
-    dispatch(setSearchCompanyByText(input));
-  }, [input]);
   return (
     <div>
       <div className="max-w-4xl mx-auto my-10 ">
         <h1 className="text-2xl font-semibold mb-7 text-center">
-          Good {getCurrentTime()}, {user.fullName}! Manage your listed companies
+          Good {getCurrentTime()}, {user.fullName}! Manage your posted Jobs
           here!
         </h1>
         <div className="flex justify-between items-center mb-6">
@@ -37,16 +37,16 @@ function Companies() {
           <Button
             className="ml-4 cursor-pointer"
             onClick={() => {
-              navigate("/admin/companies/create");
+              navigate("/admin/jobs/create");
             }}
           >
-            New Company
+            Post a New Job
           </Button>
         </div>
-        <CompaniesTable />
+        <AdminJobsTable />
       </div>
     </div>
   );
 }
 
-export default Companies;
+export default AdminJobs;

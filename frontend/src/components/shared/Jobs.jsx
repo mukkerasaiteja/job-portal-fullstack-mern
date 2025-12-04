@@ -5,8 +5,6 @@ import { Button } from "../ui/button";
 import { X } from "lucide-react";
 import { useSelector } from "react-redux";
 
-//const jobs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
 function Jobs() {
   const [open, setOpen] = useState(false);
   const { jobs } = useSelector((store) => store.job);

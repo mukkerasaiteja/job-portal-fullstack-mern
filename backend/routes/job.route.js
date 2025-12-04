@@ -4,6 +4,8 @@ import {
   getAllJobs,
   getJobById,
   getJobsByAdmin,
+  deleteJob,
+  updateJob,
 } from "../controllers/job.controller.js";
 
 import auth from "../middlewares/authMiddleware.js";
@@ -20,9 +22,6 @@ const router = express.Router();
 // Get all jobs
 router.get("/", getAllJobs);
 
-// Get a job by ID
-router.get("/:jobId", getJobById);
-
 /**
  * RECRUITER ROUTES
  * ----------------------------
@@ -32,7 +31,16 @@ router.get("/:jobId", getJobById);
 // Post a new job
 router.post("/", auth, isRecruiter, postJob);
 
-// Get jobs posted by logged-in recruiter
+// Get jobs posted by logged-in recruiter (must be before /:jobId)
 router.get("/my/jobs", auth, isRecruiter, getJobsByAdmin);
+
+// Update a job
+router.put("/:jobId", auth, isRecruiter, updateJob);
+
+// Delete a job
+router.delete("/:jobId", auth, isRecruiter, deleteJob);
+
+// Get a job by ID
+router.get("/:jobId", getJobById);
 
 export default router;
