@@ -1,0 +1,29 @@
+{
+  "name": "jobradar",
+  "version": "1.0.0",
+  "description": "A full-stack job portal application built with React and Node.js",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently -n \"backend,frontend\" -c \"yellow,cyan\" \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && nodemon index.js",
+    "install:all": "npm install && cd frontend && npm install && cd ../backend && npm install",
+    "build": "cd frontend && npm run build",
+    "start": "cd backend && node index.js",
+    "lint": "cd frontend && npm run lint"
+  },
+  "keywords": [
+    "job-portal",
+    "react",
+    "nodejs",
+    "mongodb",
+    "express",
+    "mern-stack"
+  ],
+  "author": "Sai Teja Mukkera",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.1.0"
+  }
+}
