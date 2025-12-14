@@ -26,6 +26,14 @@ app.use(morgan("dev"));
 
 const PORT = PORT_SERVER || 8080;
 
+app.get("/health", (req, res) => {
+  res.status(200).json({
+    status: "ok",
+    uptime: process.uptime(),
+    timestamp: new Date().toISOString(),
+  });
+});
+
 //Using Routes
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/company", companyRoutes);
