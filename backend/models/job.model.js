@@ -17,6 +17,11 @@ const jobSchema = new mongoose.Schema(
       required: true,
     },
 
+    vacancies: {
+      type: Number,
+      required: true,
+    },
+
     location: {
       type: String,
       required: true,
@@ -54,6 +59,9 @@ const jobSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+// Add text index for faster search queries
+jobSchema.index({ title: "text", description: "text", location: "text" });
 
 const jobModel = mongoose.model("Job", jobSchema);
 

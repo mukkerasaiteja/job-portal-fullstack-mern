@@ -14,6 +14,7 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
+      select: false,
     },
     phoneNumber: {
       type: String,
@@ -27,8 +28,8 @@ const userSchema = new mongoose.Schema(
     profile: {
       bio: { type: String },
       skills: { type: [String], default: [] },
-      resume: { type: String, default: "" },
-      resumeOriginalName: { type: String },
+      resumeURL: { type: String, default: "" },
+      resumeOriginalName: { type: String, default: "NoName.pdf" },
       companyApplied: [
         {
           //Add multiple companies applied for later
@@ -36,7 +37,8 @@ const userSchema = new mongoose.Schema(
           ref: "Company",
         },
       ],
-      profilePicture: { type: String, default: "" },
+      profilePictureURL: { type: String, default: "" },
+      profilePictureOriginalName: { type: String, default: "" },
     },
   },
   { timestamps: true }

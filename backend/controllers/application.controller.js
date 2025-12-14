@@ -41,9 +41,18 @@ async function applyJob(req, res) {
     job.applications.push(newApplication._id);
     await job.save();
 
+    const updatedJob = await jobModel.findById(jobId).populate({
+      path: "applications",
+      populate: {
+        path: "applicant",
+        select: "-password",
+      },
+    });
+
     return res.status(201).json({
       message: "Application submitted successfully",
       application: newApplication,
+      job: updatedJob,
     });
   } catch (error) {
     console.error("Apply job error:", error);
@@ -64,7 +73,10 @@ async function getAppliedJobs(req, res) {
       .find({ applicant: userId })
       .populate({
         path: "job",
-        populate: { path: "company" },
+        populate: {
+          path: "company",
+          model: "Company",
+        },
       })
       .sort({ createdAt: -1 });
 
