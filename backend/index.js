@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:3000",
-  "https://job-portal-website-iota.vercel.app",
+  "https://job-radar.vercel.app",
 ];
 
 const corsOptions = {
