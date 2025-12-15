@@ -35,7 +35,7 @@ function Hero() {
 
         {/* Title */}
         <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-foreground">
-          Search, Apply & Get your <br className="hidden sm:block" />
+          Search, Apply & Get your <br className="block" />
           <span className="text-[#6A38C2] dark:text-purple-400">
             <Typewriter
               words={["Perfect Job", "Ideal Job", "Dream Job"]}
