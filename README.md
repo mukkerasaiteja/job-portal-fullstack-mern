@@ -176,7 +176,7 @@ This project is licensed under the MIT License.
 
 **Sai Teja Mukkera**
 
-[![GitHub](https://img.shields.io/badge/GitHub-mukkerasaiteja-181717?logo=github)](https://github.com/mukkerasaiteja)
+[![GitHub](https://img.shields.io/badge/GitHub-saitejamukkera-181717?logo=github)](https://github.com/saitejamukkera)
 
 ---
 
